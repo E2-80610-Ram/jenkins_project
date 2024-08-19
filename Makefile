@@ -1,11 +1,15 @@
-CC=gcc
-CFLAGS=-I.
+@echo off
 
-main: main.o
-	$(CC) -o main main.o
+set CC=gcc
+set CFLAGS=-I.
 
-main.o: main.c
-	$(CC) -c main.c $(CFLAGS)
+if "%1" == "clean" goto clean
 
-clean:
-	rm -f *.o main
+%CC% -c main.c %CFLAGS%
+%CC% -o main main.o
+goto end
+
+:clean
+del *.o main.exe
+
+:end
